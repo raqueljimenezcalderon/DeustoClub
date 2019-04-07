@@ -8,14 +8,16 @@
 #ifndef PELICULA_H_
 #define PELICULA_H_
 
+//ESTRUCTURAS:
 typedef struct {
-    char codigoPelicula [5];
-    char titulo [40];
-    char productora [20];
+    char codigoPelicula[5];
+    char titulo[40];
+    char productora[20];
     int año;
-    char categoria [20];
-    char ubicacion [20];
+    char categoria[20];
+    char ubicacion[20];
 } Peliculas;
 
+//METODOS:
 
 #endif /* PELICULA_H_ */
