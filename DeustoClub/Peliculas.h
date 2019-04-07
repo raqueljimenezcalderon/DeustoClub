@@ -8,6 +8,9 @@
 #ifndef PELICULA_H_
 #define PELICULA_H_
 
+#include <stdio.h>
+#include <stlib.h>
+
 //ESTRUCTURAS:
 typedef struct {
     char codigoPelicula[5];
@@ -19,5 +22,9 @@ typedef struct {
 } Peliculas;
 
 //METODOS:
+void anyadirNuevaPelicula();
+void elimimarPelicula();
+void alquilarPelicula();
+
 
 #endif /* PELICULA_H_ */

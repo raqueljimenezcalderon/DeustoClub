@@ -20,7 +20,7 @@ typedef struct {
     long telefono;
     char sexo;
     char numTarjetaCredito[16];
-} Usuarios;
+} Usuario;
 
 typedef struct {
     char cargo[20];
@@ -31,6 +31,12 @@ typedef struct {
 } Trabajadores;
 
 //METODOS:
-void menuUsuario();
+void menuCliente();
+void menuTrabajador();
+void inicioSesionCliente();
+void inicioSesionTrabajador();
+void anyadirNuevoCliente();
+void mostrarPerfilCliente();
+void mostrarPerfilTrabajador();
 
 #endif //DEUSTOCLUB_PERSONAS_H

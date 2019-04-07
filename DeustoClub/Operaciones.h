@@ -12,7 +12,7 @@
 void inicioApp();
 void elegirTipoInicio();
 void mostrarInformacionVideoClub();
-void anyadirNuevoCliente();
+
 
 
 #endif //DEUSTOCLUB_OPERACIONES_H

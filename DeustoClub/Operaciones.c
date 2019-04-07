@@ -5,6 +5,8 @@
 #include <stlib.h>
 #include "Operaciones.h"
 #include "Personas.h"
+#include "Peliculas.h"
+
 
 void inicioApp() {
     int respuesta1, respuesta2;
@@ -70,10 +72,10 @@ void elegirTipoInicio() {
 
     switch (opcion) {
         case 1:
-            //Metodo Entrar Como Usuario
+            inicioSesionCliente();
             break;
         case 2:
-            //Metodo Entar Como Trabajador
+            inicioSesionTrabajador();
             break;
         case 3:
             inicioApp();
@@ -138,62 +140,6 @@ void mostrarInformacionVideoClub() {
     } while (respuesta != 0);
 }
 
-void anyadirNuevoCliente() {
 
-    char DNICliente[10], nomCliente[20], apellCliente[20], email[40], dir[40], contrasenya[10], numTarjetaCred[16];
-    long TFNO;
-    char sexo;
-
-    fflush(stdin);
-    printf("Introduce el DNI completo: ");
-    fflush(stdout);
-    gets(DNICliente);
-    printf("Introduce el nombre de usuario: ");
-    fflush(stdout);
-    gets(nomCliente);
-    printf("Introduce el apellido: ");
-    fflush(stdout);
-    gets(apellCliente);
-    printf("Introduce el email: ");
-    fflush(stdout);
-    gets(email);
-    printf("Introduce la direccion: ");
-    fflush(stdout);
-    gets(dir);
-    printf("Introduce el telefono: ");
-    fflush(stdout);
-    scanf("%ld", &TFNO);
-    printf("Introduce el sexo (H - hombre; M - Mujer; O - Otro): ");
-    fflush(stdout);
-    scanf(" %c", &sexo);
-    fflush(stdin);
-    printf("Introduce la contrasena: ");
-    fflush(stdout);
-    gets(contrasenya);
-    printf("Introduce el numero de tarjeta de credito: ");
-    fflush(stdout);
-    gets(numTarjetaCred);
-    printf("\n");
-
-    FILE *fichero = fopen("clientesDeustoClub.txt", "a");
-    if (fichero == NULL) {
-        printf("--Error al intentar abrir el fichero--");
-    }
-
-    fprintf(fichero, "%s, %s, %s, %s, %s, %s, %ld, %c, %s, %s\n", DNI, nomCliente, apellCliente, email, dir, TFNO, sexo, numTarjetaCred, contrasena);
-
-    fclose(fichero);
-
-    printf("El cliente se ha registrado correctamente. Menu de inicio -> 0\n");
-    int respuesta1;
-    do {
-        fflush(stdout); scanf("%i", &respuesta1);
-        if (respuesta1 == 0) {
-            inicioCorrectoTrabajador();
-        } else {
-            printf("--Caracter no valido--\n");
-        }
-    } while (respuesta1 != 0);
-}
 
 
