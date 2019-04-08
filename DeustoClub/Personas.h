@@ -6,7 +6,7 @@
 #define DEUSTOCLUB_PERSONAS_H
 
 #include <stdio.h>
-#include <stlib.h>
+#include <stdlib.h>
 
 
 //ESTRUCTURAS:
@@ -38,5 +38,6 @@ void inicioSesionTrabajador();
 void anyadirNuevoCliente();
 void mostrarPerfilCliente();
 void mostrarPerfilTrabajador();
+void contraOlvidada();
 
 #endif //DEUSTOCLUB_PERSONAS_H

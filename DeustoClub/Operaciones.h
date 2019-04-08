@@ -6,12 +6,13 @@
 #define DEUSTOCLUB_OPERACIONES_H
 
 #include <stdio.h>
-#include <stlib.h>
+#include <stdlib.h>
 
 //METODOS:
 void inicioApp();
 void elegirTipoInicio();
 void mostrarInformacionVideoClub();
+void eliminarUsuario();
 
 
 

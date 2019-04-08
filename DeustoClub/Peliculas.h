@@ -9,7 +9,7 @@
 #define PELICULA_H_
 
 #include <stdio.h>
-#include <stlib.h>
+#include <stdlib.h>
 
 //ESTRUCTURAS:
 typedef struct {
@@ -25,6 +25,9 @@ typedef struct {
 void anyadirNuevaPelicula();
 void elimimarPelicula();
 void alquilarPelicula();
+void mostrarListaPeliculas();
+void elegirPelicula();
+void devolverPelicula();
 
 
 #endif /* PELICULA_H_ */

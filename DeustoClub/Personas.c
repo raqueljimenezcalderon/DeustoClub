@@ -4,9 +4,10 @@
 
 
 #include <stdio.h>
-#include <stlib.h>
+#include <stdlib.h>
 #include "Personas.h"
 #include "Peliculas.h"
+#include "Operaciones.h"
 
 void menuCliente() {
     int respuesta1, respuesta2;
@@ -16,14 +17,15 @@ void menuCliente() {
     printf("\t2. Devolver una Pelicula\n");
     printf("\t3. Visualizar Perfil Personal\n");
     printf("\t4. Cerrar sesion\n");
-    fflush(stdout); scanf("%i", &respuesta1);
+    fflush(stdout);
+    scanf("%i", &respuesta1);
 
     switch (respuesta1) {
         case 1:
-            //Metodo Mostrar Peliculas Disponibles
+            mostrarListaPeliculas();
             break;
         case 2:
-            //Metodo Devolver Pelicula
+            devolverPelicula();
             break;
         case 3:
             mostrarPerfilCliente();
@@ -31,7 +33,7 @@ void menuCliente() {
         case 4:
             printf("¿Esta seguro de que desea cerrar sesion?\n");
             printf("\t1. Si, si deseo cerrar sesion\n");
-            printf("\t2. No, no deseo cerrar sesion\n")
+            printf("\t2. No, no deseo cerrar sesion\n");
             fflush(stdout);	scanf("%i", &respuesta2);
             switch (respuesta2){
                 case 1:
@@ -72,15 +74,15 @@ void menuTrabajador() {
             elimimarPelicula();
             break;
         case 3:
-            // Metodo Eliminar Usuario
+
             break;
         case 4:
-            mostrarPerfilTrabajador(); //Falta hacer
+            mostrarPerfilTrabajador();
             break;
         case 5:
             printf("¿Esta seguro de que desea cerrar sesion?\n");
             printf("\t1. Si, si deseo cerrar sesion\n");
-            printf("\t2. No, no deseo cerrar sesion\n")
+            printf("\t2. No, no deseo cerrar sesion\n");
             fflush(stdout);	scanf("%i", &respuesta2);
             switch (respuesta2){
                 case 1:
@@ -108,9 +110,11 @@ void inicioSesionCliente() {
 
     printf("Iniciar Sesion Modo Cliente:\n");
     printf("\tEmail: ");
-    fflush(stdout); scanf("%s", emailCliente);
+    fflush(stdout);
+    scanf("%s", emailCliente);
     printf("\tContrasena: ");
-    fflush(stdout);	scanf("%s", contrasenya);
+    fflush(stdout);
+    scanf("%s", contrasenya);
 
     FILE *fichero = fopen("ClientesDeustoClub.txt", "r");
     if (fichero == NULL) {
@@ -144,7 +148,7 @@ void inicioSesionTrabajador() {
 
     FILE *fichero = fopen("TrabajadoresDeustoClub.txt", "r");
     if (fichero == NULL) {
-        printf("**Error en apertura de fichero**\n");
+        printf("--Error al intentar abrir el fichero--\n");
     }
 
     int existe = 0;
@@ -198,12 +202,12 @@ void anyadirNuevoCliente() {
     gets(numTarjetaCred);
     printf("\n");
 
-    FILE *fichero = fopen("clientesDeustoClub.txt", "a");
+    FILE *fichero = fopen("ClientesDeustoClub.txt", "a");
     if (fichero == NULL) {
         printf("--Error al intentar abrir el fichero--");
     }
 
-    fprintf(fichero, "%s, %s, %s, %s, %s, %s, %ld, %c, %s, %s\n", DNI, nomCliente, apellCliente, email, dir, TFNO, sexo, numTarjetaCred, contrasena);
+    fprintf(fichero, "%s, %s, %s, %s, %s, %s, %ld, %c, %s, %s\n", DNICliente, nomCliente, apellCliente, email, dir, TFNO, sexo, numTarjetaCred, contrasenya);
 
     fclose(fichero);
 
@@ -219,6 +223,128 @@ void anyadirNuevoCliente() {
     } while (respuesta1 != 0);
 }
 
+void mostrarPerfilUsuario(char DNIMostrar){
+    Usuario cliente;
 
+    FILE *fichero = fopen("ClientesDeustoClub.txt", "r");
+    if (fichero == NULL) {
+        printf("--Error al intentar abrir el fichero--\n");
+    }
 
+    int existe = 0;
+    while (fscanf(fichero, "%[^,],%[^,],%[^,],%[^,],%[^,],%ld,%c,%[^,],%[^\n]\n", cliente.DNI, cliente.nombre, cliente.apellido, cliente.email, cliente.direccion, &cliente.telefono, &cliente.sexo, cliente.contrasena, cliente.numTarjetaCredito) != EOF) {
+        if (strcmp(DNIMostrar, cliente.DNI) == 0) {
+            printf("Perfil de %s %s\n", cliente.nombre, cliente.apellido);
+            printf("\n\tDNI: %s", cliente.DNI);
+            printf("\n\tNombre: %s", cliente.nombre);
+            printf("\n\tApellido: %s", cliente.apellido);
+            printf("\n\tEmail: %s", cliente.email);
+            printf("\n\tDireccion: %s", cliente.direccion);
+            printf("\n\tTelefono: %ld", cliente.telefono);
+            printf("\n\tSexo: %c", cliente.sexo);
+            printf("\n\tContrasena: %s", cliente.contrasena);
+            printf("\n\tNumero de tarjeta de crédito: %s", cliente.numTarjetaCredito);
+            printf("Menu Cliente -> 0\n");
+            existe = 1;
+        }
+    }
+    if(existe == 0) {
+        printf("Este usuario no existe\n");
+        perfilUsuario();
+    }
+    printf("\n");
 
+    int respuesta;
+    do {
+        fflush(stdout); scanf("%i", &respuesta);
+        if (respuesta == 0) { inicioCorrectoUsuario();
+        } else {
+            printf("--Caracter no valido--\n");
+        }
+    } while (respuesta != 0);
+}
+
+void mostrarPerfilTrabajador(DNIMostrar){
+    Trabajadores trabajador;
+
+    FILE *fichero = fopen("TrabajadoresDeustoClub.txt", "r");
+    if (fichero == NULL) {
+        printf("--Error al intentar abrir el fichero--\n");
+    }
+
+    int existe = 0;
+    while (fscanf(fichero, "%[^,],%[^,],%[^,],%[^,],%[^,],%ld,%c,%[^,],%ld,%[^,],%[^,],%[^,],%[^\n]\n", trabajador.usuario.DNI, trabajador.usuario.nombre, trabajador.usuario.apellido, trabajador.usuario.email, trabajador.usuario.direccion, &trabajador.usuario.telefono, &trabajador.usuario.sexo, trabajador.cargo, &trabajador.salario, trabajador.numCuentaBancaria, trabajador.numSeguridadSocial, trabajador.usuario.contrasena, trabajador.usuario.numTarjetaCredito)!= EOF) {
+        if (strcmp(DNIMostrar, trabajador.usuario.DNI) == 0) {
+            printf("Perfil de %s %s\n", trabajador.usuario.nombre, trabajador.usuario.apellido);
+            printf("\n\tDNI: %s", trabajador.usuario.DNI);
+            printf("\n\tNombre: %s", trabajador.usuario.nombre);
+            printf("\n\tEmail: %s", trabajador.usuario.email);
+            printf("\n\tDireccion: %s", trabajador.usuario.direccion);
+            printf("\n\tTelefono: %ld", trabajador.usuario.telefono);
+            printf("\n\tSexo: %c", trabajador.usuario.sexo);
+            printf("\n\tCargo: %s", trabajador.cargo);
+            printf("\n\tSalario: %ld", trabajador.salario);
+            printf("\n\tNumero de cuenta Bancaria: %s", trabajador.numCuentaBancaria);
+            printf("\n\tNSS: %s", trabajador.numSeguridadSocial);
+            printf("\n\tContraseña: %s", trabajador.usuario.contrasena);
+            printf("\n\tNumero de tarjeta de credito: %s,", trabajador.usuario.numTarjetaCredito);
+            printf("Menu Trabajador -> 0 \n");
+            existe = 1;
+        }
+    }
+    if(existe == 0) {
+        printf("Este usuario no existe\n");
+        perfilUsuario();
+    }
+    printf("\n");
+
+    int respuesta;
+    do {
+        fflush(stdout); scanf("%i", &respuesta);
+        if (respuesta == 0) { inicioCorrectoUsuario();
+        } else {
+            printf("--Caracter no valido--\n");
+        }
+    } while (respuesta != 0);
+}
+
+void eliminarUsuario() {
+    char DNI[10], email[40], contrasena[25], nombre[20], apellido[20],
+            direccion[40], numTarjetaCredito[16];
+    long telefono;
+    char sexo;
+    FILE *ficheroOrigen = fopen("clientesDeustoClub.txt", "r");
+    if (ficheroOrigen == NULL ) {
+        printf("--Error al intentar abrir el fichero--\n");
+    }
+    FILE *ficheroDestino = fopen("aux.txt", "w");
+    if (ficheroDestino == NULL ) {
+        printf("--Error al intentar abrir el fichero--\n");
+    }
+
+    char DNIBuscar[10];
+    printf("Introduce el DNI del usuario que quieres eliminar: ");
+    fflush(stdout);
+    scanf("%s", DNIBuscar);
+    rewind(ficheroOrigen);
+    int eliminado = 0;
+    while (fscanf(ficheroOrigen, "%[^,],%[^,],%[^,],%[^,],%[^,],%ld,%c,%[^,],%[^\n]\n", DNI, nombre, apellido, email, direccion, &telefono, &sexo, contrasena, numTarjetaCredito) != EOF) {
+        if (strcmp(DNI, DNIBuscar) != 0) {
+            fprintf(ficheroDestino, "%s,%s,%s,%s,%s,%ld,%c,%s\n", DNI, nombre, apellido, email, direccion, telefono, sexo, contrasena, numTarjetaCredito);
+        } else {
+            eliminado = 1;
+        }
+    }
+    if (eliminado == 0) {
+        printf("El usuario no existe\n");
+        eliminarUsuario();
+    }
+
+    fclose(ficheroOrigen);
+    fclose(ficheroDestino);
+    remove("ClientesDeustoClub.txt");
+    rename("aux.txt", "ClientesDeustoClub.txt");
+
+    printf("Usuario eliminado.\n");
+    menuTrabajador();
+}
