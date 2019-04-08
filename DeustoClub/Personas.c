@@ -116,7 +116,7 @@ void inicioSesionCliente() {
     fflush(stdout);
     scanf("%s", contrasenya);
 
-    FILE *fichero = fopen("ClientesDeustoClub.txt", "r");
+    FILE *fichero = fopen("clientesDeustoClub.txt", "r");
     if (fichero == NULL) {
         printf("--Error al intentar abrir el fichero--\n");
     }
@@ -146,7 +146,7 @@ void inicioSesionTrabajador() {
     printf("\tContrasena: ");
     fflush(stdout);	scanf("%s", contrasenya);
 
-    FILE *fichero = fopen("TrabajadoresDeustoClub.txt", "r");
+    FILE *fichero = fopen("trabajadoresDeustoClub.txt", "r");
     if (fichero == NULL) {
         printf("--Error al intentar abrir el fichero--\n");
     }
@@ -202,7 +202,7 @@ void anyadirNuevoCliente() {
     gets(numTarjetaCred);
     printf("\n");
 
-    FILE *fichero = fopen("ClientesDeustoClub.txt", "a");
+    FILE *fichero = fopen("clientesDeustoClub.txt", "a");
     if (fichero == NULL) {
         printf("--Error al intentar abrir el fichero--");
     }
@@ -226,7 +226,7 @@ void anyadirNuevoCliente() {
 void mostrarPerfilUsuario(char DNIMostrar){
     Usuario cliente;
 
-    FILE *fichero = fopen("ClientesDeustoClub.txt", "r");
+    FILE *fichero = fopen("clientesDeustoClub.txt", "r");
     if (fichero == NULL) {
         printf("--Error al intentar abrir el fichero--\n");
     }
@@ -267,7 +267,7 @@ void mostrarPerfilUsuario(char DNIMostrar){
 void mostrarPerfilTrabajador(DNIMostrar){
     Trabajadores trabajador;
 
-    FILE *fichero = fopen("TrabajadoresDeustoClub.txt", "r");
+    FILE *fichero = fopen("trabajadoresDeustoClub.txt", "r");
     if (fichero == NULL) {
         printf("--Error al intentar abrir el fichero--\n");
     }
@@ -342,8 +342,8 @@ void eliminarUsuario() {
 
     fclose(ficheroOrigen);
     fclose(ficheroDestino);
-    remove("ClientesDeustoClub.txt");
-    rename("aux.txt", "ClientesDeustoClub.txt");
+    remove("clientesDeustoClub.txt");
+    rename("aux.txt", "clientesDeustoClub.txt");
 
     printf("Usuario eliminado.\n");
     menuTrabajador();

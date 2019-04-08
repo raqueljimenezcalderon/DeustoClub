@@ -33,7 +33,7 @@ void anyadirNuevaPelicula(){
     fflush(stdout);
     gets(ubicacion);
 
-    FILE *fichero = fopen("PeliculasDeustoClub.txt", "a");
+    FILE *fichero = fopen("peliculasDeustoClub.txt", "a");
     if (fichero == NULL) {
         printf("--Error al intentar abrir el fichero--");
     }
@@ -57,12 +57,12 @@ void eliminarPelicula(){
     char codPelicula[5], tituloPelicula[40], productora[20], categoria[20], ubicacion[20];
     int anyo;
 
-    FILE *ficheroOrigen = fopen("PeliculasDuestoClub.txt", "r");
+    FILE *ficheroOrigen = fopen("peliculasDuestoClub.txt", "r");
     if (ficheroOrigen == NULL) {
         printf("--Error al intentar abrir el fichero--\n");
     }
 
-    FILE *ficheroDestino = fopen("NuevaListaPeliculas.txt", "w");
+    FILE *ficheroDestino = fopen("nuevaListaPeliculas.txt", "w");
     if (ficheroDestino == NULL) {
         printf("--Error al intentar abrir el fichero--\n");
     }
@@ -85,8 +85,8 @@ void eliminarPelicula(){
     }
 
     fclose(ficheroOrigen); fclose(ficheroDestino);
-    remove("PeliculasDeustoClub.txt");
-    rename("NuevaListaPeliculas.txt","PeliculasDeustoClub.txt");
+    remove("peliculasDeustoClub.txt");
+    rename("nuevaListaPeliculas.txt","peliculasDeustoClub.txt");
 
     printf("--Pelicula eliminada--\n");
     menuTrabajador();
@@ -96,17 +96,17 @@ void alquilarPelicula(char codPeliculaAlquilar [5]){
     char codPelicula[5],  tituloPelicula[20], productora[20], categoria[20],ubicacion[20];
     int anyo;
 
-    FILE *ficheroOrigen = fopen("PeliculasDeustoClub.txt", "r");
+    FILE *ficheroOrigen = fopen("peliculasDeustoClub.txt", "r");
     if (ficheroOrigen == NULL) {
         printf("--Error al intentar abrir el fichero--\n");
     }
 
-    FILE *ficheroDestino = fopen("NuevaListaPeliculas.txt", "w");
+    FILE *ficheroDestino = fopen("nuevaListaPeliculas.txt", "w");
     if (ficheroDestino == NULL) {
         printf("--Error al intentar abrir el fichero--\n");
     }
 
-    FILE *ficheroAlquiladas = fopen("ListaPeliculasAlquiladas.txt", "a");
+    FILE *ficheroAlquiladas = fopen("listaPeliculasAlquiladas.txt", "a");
     if (ficheroAlquiladas == NULL) {
         printf("--Error al intentar abrir el fichero--\n");
     }
@@ -124,8 +124,8 @@ void alquilarPelicula(char codPeliculaAlquilar [5]){
     }
 
     fclose(ficheroOrigen); fclose(ficheroDestino); fclose(ficheroAlquiladas);
-    remove("PeliculasDeustoClub.txt");
-    rename("NuevaListaPeliculas.txt","PeliculasDeustoClub.txt");
+    remove("peliculasDeustoClub.txt");
+    rename("nuevaListaPeliculas.txt","peliculasDeustoClub.txt");
     menuCliente();
 }
 
@@ -133,8 +133,7 @@ void mostrarListaPeliculas(){
     char codPelicula[5],  tituloPelicula[20], productora[20], categoria[20],ubicacion[20];
     int anyo;
 
-
-    FILE *ficheroOrigen = fopen("PeliculasDeustoClub.txt", "r");
+    FILE *ficheroOrigen = fopen("peliculasDeustoClub.txt", "r");
     if (ficheroOrigen == NULL) {
         printf("--Error al intentar abrir el fichero--\n");
     }
@@ -148,13 +147,13 @@ void elegirPelicula(){
     char codPelicula[5], tituloPelicula[40], productora[20], categoria[20], ubicacion[20];
     int anyo;
 
-    FILE *ficheroOrigen = fopen("PeliculasDuestoClub.txt", "r");
+    FILE *ficheroOrigen = fopen("peliculasDuestoClub.txt", "r");
     if (ficheroOrigen == NULL) {
         printf("--Error al intentar abrir el fichero--\n");
     }
 
     char peliculaSeleccionada[5];
-    printf("¿Cual es el codigo de la pelicula que desea alquilar? ");
+    printf("¿Cual es el codigo de la pelicula que desea alquilar? \n");
     fflush(stdout);
     scanf("%s", peliculaSeleccionada);
 
@@ -181,17 +180,17 @@ void devolverPelicula(){
     fflush(stdout);
     scanf("%s", codPeliculaDevolver);
 
-    FILE *ficheroOrigen = fopen("ListaPeliculasAlquiladas.txt", "r");
+    FILE *ficheroOrigen = fopen("listaPeliculasAlquiladas.txt", "r");
     if (ficheroOrigen == NULL) {
         printf("--Error al intentar abrir el fichero--\n");
     }
 
-    FILE *ficheroDestino = fopen("NuevaListaPeliculas.txt", "w");
+    FILE *ficheroDestino = fopen("nuevaListaPeliculas.txt", "w");
     if (ficheroDestino == NULL) {
         printf("--Error al intentar abrir el fichero--\n");
     }
 
-    FILE *ficheroPeliculas = fopen("PeliculasDeustoClub.txt", "a");
+    FILE *ficheroPeliculas = fopen("peliculasDeustoClub.txt", "a");
     if (ficheroPeliculas == NULL) {
         printf("--Error al intentar abrir el fichero--\n");
     }
@@ -209,8 +208,8 @@ void devolverPelicula(){
     fclose(ficheroOrigen);
     fclose(ficheroDestino);
     fclose(ficheroAlquiladas);
-    remove("ListaPeliculasAlquiladas.txt");
-    rename("NuevaListaPeliculas.txt","ListaPeliculasAlquiladas.txt");
+    remove("listaPeliculasAlquiladas.txt");
+    rename("nuevaListaPeliculas.txt","listaPeliculasAlquiladas.txt");
     menuCliente();
 
 }

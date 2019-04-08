@@ -154,7 +154,7 @@ void contraOlvidada() {
     fflush(stdout);
 
     if ((respuesta == 'u') || (respuesta == 'U')) {
-        fichero = fopen("ClientesDeustoClub.txt", "r");
+        fichero = fopen("clientesDeustoClub.txt", "r");
         if (fichero == NULL ) {
             printf("--Error al intentar abrir el fichero--\n");
         }
@@ -193,7 +193,7 @@ void contraOlvidada() {
             contraOlvidada();
         }
     } else if ((respuesta == 't') || (respuesta == 'T')) {
-        fichero = fopen("TrabajadoresDesutoClub.txt", "r");
+        fichero = fopen("trabajadoresDesutoClub.txt", "r");
         if (fichero == NULL ) {
             printf("--Error al intentar abrir el fichero--\n");
         }
